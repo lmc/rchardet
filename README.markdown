@@ -1,5 +1,9 @@
 # rCharDet*19*
 
+## tldr; Changes
+
+Namespaced everything into CharDet19 (instead of CharDet), so it can be used with Rails 2.3 apps running on Ruby 1.9. Rails 2.3's ActionMailer vendors TMail which vendors an old conflicting version of CharDet.
+
 ## [Project Page](http://rubyforge.org/projects/rchardet) | [1.9 Author](https://github.com/edouard/rchardet) | [Original Author](https://github.com/jmhodges/rchardet)
 
 *rCharDet* is a character encoding detection library for ruby and the implementation is based on Mozilla Charset Detectors. 
