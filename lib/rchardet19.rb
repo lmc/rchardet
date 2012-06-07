@@ -17,47 +17,47 @@
 
 $LOAD_PATH.unshift File.expand_path(File.dirname(__FILE__))
 
-require 'rchardet/charsetprober'
-require 'rchardet/mbcharsetprober'
+require 'rchardet19/charsetprober'
+require 'rchardet19/mbcharsetprober'
 
-require 'rchardet/big5freq'
-require 'rchardet/big5prober'
-require 'rchardet/chardistribution'
-require 'rchardet/charsetgroupprober'
+require 'rchardet19/big5freq'
+require 'rchardet19/big5prober'
+require 'rchardet19/chardistribution'
+require 'rchardet19/charsetgroupprober'
 
-require 'rchardet/codingstatemachine'
-require 'rchardet/constants'
-require 'rchardet/escprober'
-require 'rchardet/escsm'
-require 'rchardet/eucjpprober'
-require 'rchardet/euckrfreq'
-require 'rchardet/euckrprober'
-require 'rchardet/euctwfreq'
-require 'rchardet/euctwprober'
-require 'rchardet/gb2312freq'
-require 'rchardet/gb2312prober'
-require 'rchardet/hebrewprober'
-require 'rchardet/jisfreq'
-require 'rchardet/jpcntx'
-require 'rchardet/langbulgarianmodel'
-require 'rchardet/langcyrillicmodel'
-require 'rchardet/langgreekmodel'
-require 'rchardet/langhebrewmodel'
-require 'rchardet/langhungarianmodel'
-require 'rchardet/langthaimodel'
-require 'rchardet/latin1prober'
+require 'rchardet19/codingstatemachine'
+require 'rchardet19/constants'
+require 'rchardet19/escprober'
+require 'rchardet19/escsm'
+require 'rchardet19/eucjpprober'
+require 'rchardet19/euckrfreq'
+require 'rchardet19/euckrprober'
+require 'rchardet19/euctwfreq'
+require 'rchardet19/euctwprober'
+require 'rchardet19/gb2312freq'
+require 'rchardet19/gb2312prober'
+require 'rchardet19/hebrewprober'
+require 'rchardet19/jisfreq'
+require 'rchardet19/jpcntx'
+require 'rchardet19/langbulgarianmodel'
+require 'rchardet19/langcyrillicmodel'
+require 'rchardet19/langgreekmodel'
+require 'rchardet19/langhebrewmodel'
+require 'rchardet19/langhungarianmodel'
+require 'rchardet19/langthaimodel'
+require 'rchardet19/latin1prober'
 
-require 'rchardet/mbcsgroupprober'
-require 'rchardet/mbcssm'
-require 'rchardet/sbcharsetprober'
-require 'rchardet/sbcsgroupprober'
-require 'rchardet/sjisprober'
-require 'rchardet/universaldetector'
-require 'rchardet/utf8prober'
+require 'rchardet19/mbcsgroupprober'
+require 'rchardet19/mbcssm'
+require 'rchardet19/sbcharsetprober'
+require 'rchardet19/sbcsgroupprober'
+require 'rchardet19/sjisprober'
+require 'rchardet19/universaldetector'
+require 'rchardet19/utf8prober'
 
-module CharDet
+module CharDet19
   VERSION = "1.3"
-  def CharDet.detect(aBuf, options = {})
+  def self.detect(aBuf, options = {})
     if aBuf.nil?
       raise Exception.new("Sorry, we can't guess the encoding on a nil object") if not options[:silent]
       return self.create("", 0.0)
@@ -65,7 +65,7 @@ module CharDet
     
     u = UniversalDetector.new
     u.reset
-    u.feed(aBuf)
+    u.feed( aBuf.dup ) #don't want to mutate source string
     u.close
     self.create(u.result['encoding'], u.result['confidence'])
   end
